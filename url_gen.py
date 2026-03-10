@@ -2,9 +2,16 @@
 Generates a QR code image from a given URL or text.
 """
 import argparse
+import logging
 from pathlib import Path
 
 import qrcode
+
+# Configure logging
+LEVEL = logging.INFO
+FORMAT = '%(message)s'
+logging.basicConfig(level=LEVEL, format=FORMAT)
+logger = logging.getLogger(__name__)
 
 parser = argparse.ArgumentParser(description='Generate a QR code image.')
 parser.add_argument('url', help='URL or text to encode in the QR code')
@@ -30,4 +37,4 @@ img = qr.make_image(
     back_color='white',
     )
 img.save(output_path)
-print(f"QR code saved to {output_path}")
+logger.info("QR code saved to %s", output_path)
